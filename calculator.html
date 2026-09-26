@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World with Calculator Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; padding-top: 50px; background: #f4f4f9; }
+        .card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 300px; }
+        .field { margin-bottom: 15px; }
+        label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; color: #555; }
+        input, select, button { width: 100%; padding: 10px; box-sizing: border-box; border-radius: 5px; border: 1px solid #ccc; font-size: 14px; }
+        button { background: #2563eb; color: white; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        button:hover { background: #1d4ed8; }
+        .result-box { margin-top: 20px; padding: 12px; background: #f1f5f9; border-radius: 5px; font-weight: bold; color: #0f172a; word-break: break-all; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Hello Easy Calculator!</h2>
+    <div class="field">
+        <label>First Number You Want To Use?</label>
+        <input type="number" id="num1" value="10">
+    </div>
+    <div class="field">
+        <label>Operation Need It</label>
+        <select id="op">
+            <option value="+">Addition (+)</option>
+            <option value="-">Subtraction (-)</option>
+            <option value="*">Multiplication (*)</option>
+            <option value="/" selected>Standard Division (/)</option>
+            <option value="//">Floor Division (//)</option>
+            <option value="+-">Feeling Bad(D:)</option>
+        </select>
+    </div>
+    <div class="field">
+        <label>Second Number You Want To Use?</label>
+        <input type="number" id="num2" value="3">
+    </div>
+    <button onclick="handleCalculate()">Calculate</button>
+
+    <div class="result-box" id="result">Result: 3.3333333333333335</div>
+</div>
+
+<script>
+    // Exact logic from earlier
+    function calculate(num1, operation, num2) {
+        switch (operation) {
+            case "+": return num1 + num2;
+            case "-": return num1 - num2;
+            case "*": return num1 * num2;
+            case "/": 
+                if (num2 === 0) return "No I Cannot divide by zero!";
+                return num1 / num2;
+            case "//": 
+                if (num2 === 0) return "No I Cannot divide by zero!";
+                return Math.floor(num1 / num2);
+            case "+-": return "Everything is gonna be ok!";
+            default: return "Error: Invalid operation!";
+        }
+    }
+
+    function handleCalculate() {
+        const n1 = parseFloat(document.getElementById('num1').value);
+        const op = document.getElementById('op').value;
+        const n2 = parseFloat(document.getElementById('num2').value);
+        
+        const res = calculate(n1, op, n2);
+        document.getElementById('result').innerText = "Result: " + res;
+    }
+</script>
+
+</body>
+</html>
